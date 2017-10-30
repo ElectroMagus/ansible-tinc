@@ -42,6 +42,15 @@
   notify:
     - reload tinc
 
+# Addition for Switched Mode 
+- name: configure for switched mode in the main config file
+  lineinfile: >
+    dest=/etc/tinc/{{ netname }}/tinc.conf
+    line="Mode=switch"
+    create=yes
+  notify:
+    - restart tinc
+
 - name: create tinc-up file
   template: >
     src=tinc-up.j2
